@@ -11,3 +11,4 @@
 ![](/images/diyruz_motion_1.jpg)
 ![](/images/diyruz_motion_2.jpg)
 ![](/images/diyruz_motion_3.jpg)
+![](/images/diyruz_motion_sheme.jpg)
