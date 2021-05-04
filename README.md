@@ -8,4 +8,4 @@
 1. Hold button (1) for 10 seconds, this will reset device to FN(factory new) status
 2. Go to step 1 for FN device
 
-![](/image/diyruz_motion.jpg)
+![](/images/diyruz_motion_1.jpg)
