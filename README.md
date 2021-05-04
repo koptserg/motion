@@ -9,3 +9,5 @@
 2. Go to step 1 for FN device
 
 ![](/images/diyruz_motion_1.jpg)
+![](/images/diyruz_motion_2.jpg)
+![](/images/diyruz_motion_3.jpg)
