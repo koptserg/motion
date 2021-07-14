@@ -21,8 +21,8 @@
 - Downalod from github [releases](https://github.com/koptserg/motion/releases)
 
 ![](/images/diyruz_motion_1.jpg)
-- Settings can be changed without restarting zigbee2mqtt.
+- Settings can be changed without restarting zigbee2mqtt
 ![](/images/diyruz_motion_2.jpg)
 ![](/images/diyruz_motion_3.jpg)
-- Bind.
+- Bind
 ![](/images/diyruz_motion_4.jpg)
