@@ -262,7 +262,7 @@ const occupancyDiscovery = {
     discovery_payload: {
         payload_on: true,
         payload_off: false,
-        icon: 'hass:walk',
+        device_class: 'motion',
         value_template: '{{ value_json.occupancy }}',
     },
 };
@@ -270,9 +270,9 @@ const contactDiscovery = {
     type: 'binary_sensor',
     object_id: 'contact',
     discovery_payload: {
-        payload_on: true,
-        payload_off: false,
-        icon: 'hass:door',
+        payload_on: false,
+        payload_off: true,
+        device_class: 'door',
         value_template: '{{ value_json.contact }}',
     },
 };
