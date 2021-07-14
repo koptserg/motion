@@ -256,6 +256,79 @@ const tz = {
         },
     },
 };
+const occupancyDiscovery = {
+    type: 'binary_sensor',
+    object_id: 'occupancy',
+    discovery_payload: {
+        payload_on: true,
+        payload_off: false,
+        device_class: 'motion',
+        value_template: '{{ value_json.occupancy }}',
+    },
+};
+const contactDiscovery = {
+    type: 'binary_sensor',
+    object_id: 'contact',
+    discovery_payload: {
+        payload_on: false,
+        payload_off: true,
+        device_class: 'door',
+        value_template: '{{ value_json.contact }}',
+    },
+};
+const illuminanceDiscovery = {
+    type: 'sensor',
+    object_id: 'illuminance_4',
+    discovery_payload: {
+        device_class: 'illuminance',
+        unit_of_measurement: 'lx',
+        value_template: '{{ value_json.illuminance_4 }}',
+    },
+};
+const illuminanceLRDDiscovery = {
+    type: 'sensor',
+    object_id: 'illuminance_1',
+    discovery_payload: {
+        device_class: 'illuminance',
+        value_template: '{{ value_json.illuminance_1 }}',
+    },
+};
+const temperatureDiscovery  = {
+    type: 'sensor',
+    object_id: 'temperature',
+    discovery_payload: {
+        unit_of_measurement: '°C',
+        device_class: 'temperature',
+        value_template: '{{ value_json.temperature }}',
+    },
+};
+const humidityDiscovery = {
+    type: 'sensor',
+    object_id: 'humidity',
+    discovery_payload: {
+        unit_of_measurement: '%',
+        device_class: 'humidity',
+        value_template: '{{ value_json.humidity }}',
+    },
+};
+const pressureDiscovery = {
+    type: 'sensor',
+    object_id: 'pressure',
+    discovery_payload: {
+        unit_of_measurement: 'hPa',
+        device_class: 'pressure',
+        value_template: '{{ value_json.pressure }}',
+    },
+};
+const batteryDiscovery = {
+    type: 'sensor',
+    object_id: 'battery',
+    discovery_payload: {
+        unit_of_measurement: '%',
+        device_class: 'battery',
+        value_template: '{{ value_json.battery }}',
+    },
+};
 
 const device = {
         zigbeeModel: ['DIYRuZ_Motion'],
@@ -357,6 +430,7 @@ const device = {
             await thirdEndpoint.configureReporting('msOccupancySensing', msOccupancySensingBindPayload);
             await fourthEndpoint.configureReporting('msIlluminanceMeasurement', msBindPayload);
         },
+        homeassistant: [occupancyDiscovery,contactDiscovery,illuminanceDiscovery,illuminanceLRDDiscovery,temperatureDiscovery,humidityDiscovery,pressureDiscovery,batteryDiscovery],
         exposes: [
             exposes.numeric('battery', ACCESS_STATE).withUnit('%').withDescription('Remaining battery in %').withValueMin(0).withValueMax(100),
             exposes.numeric('temperature', ACCESS_STATE).withUnit('°C').withDescription('Measured temperature value'), 
