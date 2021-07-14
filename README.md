@@ -18,9 +18,9 @@
 - Attention! Do not use CP 2032 and KR 2450 with a motion sensor (YM 312 / vs 312), as at low battery voltage (<3v) false alarms occur.
 
 # Firmwares
-Downalod from github [releases](https://github.com/koptserg/motion/releases)
+- Downalod from github [releases](https://github.com/koptserg/motion/releases)
 
 ![](/images/diyruz_motion_1.jpg)
-Settings can be changed without restarting zigbee2mqtt.
+- Settings can be changed without restarting zigbee2mqtt.
 ![](/images/diyruz_motion_2.jpg)
 ![](/images/diyruz_motion_3.jpg)
