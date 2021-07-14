@@ -15,7 +15,7 @@
 - [2AAA](hardware/AAA/)
 ### CR2 version
 - [CR2](hardware/CR2/)
-- Attention! Do not use CR2032 and CR2450 with a motion sensor (AM312 / BS312), as low battery power causes false alarms.
+- Attention! Do not use CP 2032 and KR 2450 with a motion sensor (YM 312 / vs 312), as at low battery voltage (<3v) false alarms occur.
 
 # Firmwares
 Downalod from github [releases](https://github.com/koptserg/motion/releases)
