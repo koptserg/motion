@@ -24,3 +24,4 @@
 - Settings can be changed without restarting zigbee2mqtt.
 ![](/images/diyruz_motion_2.jpg)
 ![](/images/diyruz_motion_3.jpg)
+![](/images/diyruz_motion_4.jpg)
