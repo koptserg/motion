@@ -12,7 +12,9 @@
 ![](/images/photo_2021-07-11_18-00-41.jpg)
 ![](/images/photo_2021-07-11_18-02-03.jpg)
 ### 2AAA version
+- [2AAA](hardware/AAA/)
 ### CR2 version
+- [CR2](hardware/CR2/)
 
 # Firmwares
 ![](/images/diyruz_motion_1.jpg)
