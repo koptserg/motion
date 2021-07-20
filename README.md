@@ -35,3 +35,4 @@
 # Thanks for the help
 - firmware github [diyruz](https://github.com/diyruz) by [@anonymass](https://t.me/anonymass)
 - hardware and testing [@ring04](https://t.me/ring04)
+- telegram channel [Zigdev](https://t.me/zigdev)
