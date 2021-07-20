@@ -33,4 +33,4 @@
 ![](/images/diyruz_motion_6.jpg)
 
 # Thanks for the help
-- firmware github [diyruz](https://github.com/diyruz)
+- firmware github [diyruz](https://github.com/diyruz) by @anonymass
