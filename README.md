@@ -13,11 +13,11 @@
 ![](/images/photo_2021-07-11_18-02-03.jpg)
 ### 2AAA version
 ![](/images/motion_AAA.jpg)
-- [2AAA](hardware/AAA/)
+- Gerber, BOM, Scheme [2AAA](hardware/AAA/)
 
 ### CR2 version
 ![](/images/motion_CR2.jpg)
-- [CR2](hardware/CR2/)
+- Gerber, BOM, Scheme [CR2](hardware/CR2/)
 - Attention! Do not use CR2032 and CR2450 with a motion sensor (AM312 / BS312), as at low battery voltage (<3v) false alarms occur.
 
 # Firmwares
