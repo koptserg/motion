@@ -12,6 +12,7 @@
 ![](/images/photo_2021-07-11_18-00-41.jpg)
 ![](/images/photo_2021-07-11_18-02-03.jpg)
 ### 2AAA version
+![](/images/![](/images/motion_AAA.jpg)
 - [2AAA](hardware/AAA/)
 
 ### CR2 version
