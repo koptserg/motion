@@ -44,13 +44,13 @@ int8 zclApp_PressureSensor_Scale = -1;
 
 uint16 zclApp_HumiditySensor_MeasuredValue = 0;
 
-uint16 zclApp_SoilHumiditySensor_MeasuredValue = 0;
-uint16 zclApp_SoilHumiditySensor_MeasuredValueRawAdc = 0;
+//uint16 zclApp_SoilHumiditySensor_MeasuredValue = 0;
+//uint16 zclApp_SoilHumiditySensor_MeasuredValueRawAdc = 0;
 
 int16 zclApp_DS18B20_MeasuredValue = 0;
 
 uint16 zclApp_IlluminanceSensor_MeasuredValue = 0;
-uint16 zclApp_IlluminanceSensor_MeasuredValueRawAdc = 0;
+//uint16 zclApp_IlluminanceSensor_MeasuredValueRawAdc = 0;
 uint16 zclApp_bh1750IlluminanceSensor_MeasuredValue = 0;
 
 uint8 zclApp_Magnet_OnOff = 0;
@@ -60,7 +60,7 @@ uint8 zclApp_Occupied_OnOff = 0;
 // Occupancy Cluster 
 uint8 zclApp_Occupied = 0; 
 /* Set default to Not be occupied */ 
-uint8 zclApp_OccType = MS_OCCUPANCY_SENSOR_TYPE_PIR;
+//uint8 zclApp_OccType = MS_OCCUPANCY_SENSOR_TYPE_PIR;
 
 #define DEFAULT_PirOccupiedToUnoccupiedDelay 60
 #define DEFAULT_PirUnoccupiedToOccupiedDelay 60

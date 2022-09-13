@@ -32,6 +32,14 @@
 #define HAL_I2C TRUE
 #define BLINK_LEDS TRUE
 
+#define LQI_REQ
+#if defined(LQI_REQ)
+#define MT_TASK
+#define MT_SYS_FUNC
+#define MT_ZDO_FUNC
+#define MT_ZDO_MGMT
+#define INT_HEAP_LEN (2688)
+#endif
 
 //one of this boards
 // #define HAL_BOARD_MOTION
@@ -45,6 +53,8 @@
 
 #define LUMOISITY_PORT 0
 #define LUMOISITY_PIN 7
+
+//#define SMART
 
 #if defined(HAL_BOARD_MOTION)
 #define POWER_SAVING

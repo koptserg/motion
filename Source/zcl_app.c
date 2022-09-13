@@ -95,6 +95,7 @@ uint8 contDetect = 0;
 uint8 motionDetect = 0;
 uint8 bh1750Detect = 0;
 uint8 BH1750_mode = ONE_TIME_HIGH_RES_MODE;
+uint8 smart_number = 1; // smart number period occupancy_timeout
 
 uint16 temp_IlluminanceSensor_MeasuredValue;
 uint16 temp_bh1750IlluminanceSensor_MeasuredValue;
@@ -357,11 +358,21 @@ uint16 zclApp_event_loop(uint8 task_id, uint16 events) {
     
     if (events & APP_MOTION_OFF_EVT) {
         LREPMaster("APP_MOTION_OFF_EVT\r\n");
-        //report    
-        zclApp_Occupied = 0;
-        zclApp_Occupied_OnOff = 0;
-        zclGeneral_SendOnOff_CmdOff(zclApp_ThirdEP.EndPoint, &inderect_DstAddr, TRUE, bdb_getZCLFrameCounter());
-        bdb_RepChangedAttrValue(zclApp_ThirdEP.EndPoint, OCCUPANCY, ATTRID_MS_OCCUPANCY_SENSING_CONFIG_OCCUPANCY);
+#ifdef SMART
+        if (smart_number == 2) {
+          smart_number = smart_number - 1;
+#endif
+          //report 
+          zclApp_Occupied = 0;
+          zclApp_Occupied_OnOff = 0;
+          zclGeneral_SendOnOff_CmdOff(zclApp_ThirdEP.EndPoint, &inderect_DstAddr, TRUE, bdb_getZCLFrameCounter());
+          bdb_RepChangedAttrValue(zclApp_ThirdEP.EndPoint, OCCUPANCY, ATTRID_MS_OCCUPANCY_SENSING_CONFIG_OCCUPANCY);
+#ifdef SMART          
+        } else {
+          smart_number = smart_number - 1;
+          osal_start_timerEx(zclApp_TaskID, APP_MOTION_OFF_EVT, (uint32)zclApp_Config.PirUnoccupiedToOccupiedDelay * 1000);
+        }
+#endif
         
         return (events ^ APP_MOTION_OFF_EVT);
     }
@@ -371,6 +382,11 @@ uint16 zclApp_event_loop(uint8 task_id, uint16 events) {
         power = 2;       
         P1DIR |=  BV(0); // P1_0 output
         P1 |=  BV(0);   // power on motion
+#ifdef SMART
+        if (smart_number < 15) {
+          smart_number = smart_number + 1;
+        }
+#endif
         
         return (events ^ APP_MOTION_DELAY_EVT);
     }
@@ -463,10 +479,10 @@ static void zclApp_HandleKeys(byte portAndAction, byte keyCode) {
        LREPMaster("Key press PORT2\r\n");
        if (contact) {
           HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
-          IEN2 &= ~HAL_KEY_BIT4; // disable port1 int
+//          IEN2 &= ~HAL_KEY_BIT4; // disable port1 int
           osal_start_timerEx(zclApp_TaskID, APP_REPORT_EVT, 200);
        } else {
-          IEN2 |= HAL_KEY_BIT4; // enable port1 int
+//          IEN2 |= HAL_KEY_BIT4; // enable port1 int
        }
      }
      LREP("contact=%d endpoint=%d\r\n", contact, endPoint);
@@ -529,8 +545,10 @@ static void zclApp_ReadSensors(void) {
 }
 
 static void zclApp_ReadLumosity(void) {
-    zclApp_IlluminanceSensor_MeasuredValueRawAdc = adcReadSampled(LUMOISITY_PIN, HAL_ADC_RESOLUTION_14, HAL_ADC_REF_AVDD, 5);
-    zclApp_IlluminanceSensor_MeasuredValue = zclApp_IlluminanceSensor_MeasuredValueRawAdc;
+//    zclApp_IlluminanceSensor_MeasuredValueRawAdc = adcReadSampled(LUMOISITY_PIN, HAL_ADC_RESOLUTION_14, HAL_ADC_REF_AVDD, 5);
+//    zclApp_IlluminanceSensor_MeasuredValue = zclApp_IlluminanceSensor_MeasuredValueRawAdc;
+    zclApp_IlluminanceSensor_MeasuredValue = adcReadSampled(LUMOISITY_PIN, HAL_ADC_RESOLUTION_14, HAL_ADC_REF_AVDD, 5);
+  
     uint16 illum = 0;
     if (temp_IlluminanceSensor_MeasuredValue > zclApp_IlluminanceSensor_MeasuredValue){
       illum = (temp_IlluminanceSensor_MeasuredValue - zclApp_IlluminanceSensor_MeasuredValue);
@@ -578,7 +596,7 @@ static void zclApp_bh1750ReadLumosity(void) {
     LREP("bh1750IlluminanceSensor_MeasuredValue value=%d\r\n", zclApp_bh1750IlluminanceSensor_MeasuredValue);
 }
 
-void user_delay_ms(uint32 period) {MicroWait(period * 1000); }
+//void user_delay_ms(uint32 period) {MicroWait(period * 1000); }
 
 static void zclApp_ReadBME280Temperature(void) {
     uint8 chip = bme280_read8(BME280_REGISTER_CHIPID);
