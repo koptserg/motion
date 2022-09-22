@@ -258,9 +258,9 @@ uint16 zclApp_event_loop(uint8 task_id, uint16 events) {
                   P1DIR |=  BV(0); // P1_0 output
                   P1 |=  BV(0);   // power on DD
                 } else {
-                  IEN2 &= ~HAL_KEY_BIT4; // disable port1 int
-                  P1 &= ~BV(0);   // power off DD //--
-                  P1DIR &= ~BV(0); // P1_0 input
+//                  IEN2 &= ~HAL_KEY_BIT4; // disable port1 int
+//                  P1 &= ~BV(0);   // power off DD //--
+//                  P1DIR &= ~BV(0); // P1_0 input
                 }
                 break;
             case ZCL_INCOMING_MSG:
