@@ -12,9 +12,12 @@
 ![](/images/photo_2021-07-11_18-00-41.jpg)
 ![](/images/photo_2021-07-11_18-02-03.jpg)
 ### 2AAA version
-- [2AAA](hardware/AAA/)
+![](/images/motion_AAA.jpg)
+- Gerber, BOM, Scheme [2AAA](hardware/AAA/)
+
 ### CR2 version
-- [CR2](hardware/CR2/)
+![](/images/motion_CR2.jpg)
+- Gerber, BOM, Scheme [CR2](hardware/CR2/)
 - Attention! Do not use CR2032 and CR2450 with a motion sensor (AM312 / BS312), as at low battery voltage (<3v) false alarms occur.
 
 # Firmwares
@@ -30,4 +33,10 @@
 - [Converters](converters/)
 
 ![](/images/diyruz_motion_5.png)
+
 ![](/images/diyruz_motion_6.jpg)
+
+# Thanks for the help
+- firmware github [diyruz](https://github.com/diyruz) by [@anonymass](https://t.me/anonymass)
+- hardware and testing by [@ring04](https://t.me/ring04)
+- telegram channel [Zigdev](https://t.me/zigdev)

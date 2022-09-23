@@ -261,7 +261,7 @@ const device = {
         zigbeeModel: ['DIYRuZ_Motion'],
         model: 'DIYRuZ_Motion',
         vendor: 'DIYRuZ',
-        description: '[Motion sensor](http://modkam.ru/?p=1700)',
+        description: '[Motion sensor](https://github.com/koptserg/motion)',
         supports: 'temperature, humidity, illuminance, contact, pressure, battery, occupancy',
         fromZigbee: [
             fz.battery_config,

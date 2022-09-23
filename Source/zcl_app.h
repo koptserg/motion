@@ -33,8 +33,8 @@ extern "C" {
 #define APP_REPORT_BATTERY_EVT          0x4000
 
 
-#define AIR_COMPENSATION_FORMULA(ADC)   ((0.179 * (double)ADC + 3926.0))
-#define WATER_COMPENSATION_FORMULA(ADC) ((0.146 * (double)ADC + 2020.0))
+//#define AIR_COMPENSATION_FORMULA(ADC)   ((0.179 * (double)ADC + 3926.0))
+//#define WATER_COMPENSATION_FORMULA(ADC) ((0.146 * (double)ADC + 2020.0))
 
 
 
@@ -57,10 +57,10 @@ extern "C" {
 #define BINARY_INPUT       ZCL_CLUSTER_ID_GEN_BINARY_INPUT_BASIC
 #define TEMP               ZCL_CLUSTER_ID_MS_TEMPERATURE_MEASUREMENT
 #define HUMIDITY           ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY
-#define SOIL_HUMIDITY      0x0408
+//#define SOIL_HUMIDITY      0x0408
 #define PRESSURE           ZCL_CLUSTER_ID_MS_PRESSURE_MEASUREMENT
 #define ILLUMINANCE        ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT
-#define ILLUMINANCE_CONFIG ZCL_CLUSTER_ID_MS_ILLUMINANCE_LEVEL_SENSING_CONFIG
+//#define ILLUMINANCE_CONFIG ZCL_CLUSTER_ID_MS_ILLUMINANCE_LEVEL_SENSING_CONFIG
 #define OCCUPANCY          ZCL_CLUSTER_ID_MS_OCCUPANCY_SENSING
 
 #define ZCL_BOOLEAN   ZCL_DATATYPE_BOOLEAN
@@ -106,17 +106,17 @@ extern SimpleDescriptionFormat_t zclApp_FourthEP;
 
 extern uint8 zclApp_BatteryVoltage;
 extern uint8 zclApp_BatteryPercentageRemainig;
-extern uint16 zclApp_BatteryVoltageRawAdc;
+//extern uint16 zclApp_BatteryVoltageRawAdc;
 extern int16 zclApp_Temperature_Sensor_MeasuredValue;
 extern int16 zclApp_PressureSensor_MeasuredValue;
 extern int16 zclApp_PressureSensor_ScaledValue;
 extern int8 zclApp_PressureSensor_Scale;
 extern uint16 zclApp_HumiditySensor_MeasuredValue;
-extern int16 zclApp_DS18B20_MeasuredValue;
-extern uint16 zclApp_SoilHumiditySensor_MeasuredValue;
-extern uint16 zclApp_SoilHumiditySensor_MeasuredValueRawAdc;
+//extern int16 zclApp_DS18B20_MeasuredValue;
+//extern uint16 zclApp_SoilHumiditySensor_MeasuredValue;
+//extern uint16 zclApp_SoilHumiditySensor_MeasuredValueRawAdc;
 extern uint16 zclApp_IlluminanceSensor_MeasuredValue;
-extern uint16 zclApp_IlluminanceSensor_MeasuredValueRawAdc;
+//extern uint16 zclApp_IlluminanceSensor_MeasuredValueRawAdc;
 extern uint16 zclApp_bh1750IlluminanceSensor_MeasuredValue;
 
 extern uint8 zclApp_Magnet_OnOff;
@@ -124,7 +124,7 @@ extern uint8 zclApp_Magnet;
 extern uint8 zclApp_Occupied_OnOff;
 // Occupancy Cluster 
 extern uint8 zclApp_Occupied; 
-extern uint8 zclApp_OccType; 
+//extern uint8 zclApp_OccType; 
 
 typedef struct
 {
@@ -175,7 +175,7 @@ extern void zclApp_Init(byte task_id);
  */
 extern UINT16 zclApp_event_loop(byte task_id, UINT16 events);
 
-void user_delay_ms(uint32_t period);
+//void user_delay_ms(uint32_t period);
 
 extern void zclApp_ResetAttributesToDefaultValues(void);
 
