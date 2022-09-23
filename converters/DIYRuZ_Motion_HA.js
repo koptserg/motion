@@ -126,12 +126,34 @@ const fz = {
             return result;
         },
     },
+    occupancy_extended: {
+        cluster: 'msOccupancySensing',
+        type: ['attributeReport', 'readResponse'],
+        convert: (model, msg, publish, options, meta) => {
+            if (msg.data.hasOwnProperty('occupancy')) {
+                if(msg.data.occupancy !== 0) {
+                    publish({occupancy_extended: 1});
+                    publish({occupancy_extended: 2});
+                } else {
+                    publish({occupancy_extended: 0});
+                }
+                return {occupancy: msg.data.occupancy === 1 ? '2' : '0'};
+            }
+        },
+    },
+
     occupancy: {
         cluster: 'msOccupancySensing',
         type: ['attributeReport', 'readResponse'],
         convert: (model, msg, publish, options, meta) => {
             if (msg.data.hasOwnProperty('occupancy')) {
-                return {occupancy: msg.data.occupancy === 1};
+                if(msg.data.occupancy !== 0) {
+                    publish({occupancy_extended: 1});
+		    publish({occupancy_extended: 2});
+                } else {
+                    publish({occupancy_extended: 0});
+		}
+                return {occupancy: msg.data.occupancy === 1 ? 'ON' : 'OFF'};
             }
         },
     },
@@ -262,8 +284,15 @@ const occupancyDiscovery = {
     discovery_payload: {
         payload_on: true,
         payload_off: false,
-        device_class: 'motion',
+	device_class: 'motion',
         value_template: '{{ value_json.occupancy }}',
+    },
+};
+const OccupancyExtendedDiscovery = {
+    type: 'sensor',
+    object_id: 'occupancy_extended',
+    discovery_payload: {
+        value_template: '{{ value_json.occupancy_extended }}',
     },
 };
 const contactDiscovery = {
@@ -272,7 +301,7 @@ const contactDiscovery = {
     discovery_payload: {
         payload_on: false,
         payload_off: true,
-        device_class: 'door',
+	device_class: 'door',
         value_template: '{{ value_json.contact }}',
     },
 };
@@ -280,53 +309,53 @@ const illuminanceDiscovery = {
     type: 'sensor',
     object_id: 'illuminance_4',
     discovery_payload: {
-        device_class: 'illuminance',
-        unit_of_measurement: 'lx',
-        value_template: '{{ value_json.illuminance_4 }}',
+      device_class: 'illuminance',
+      unit_of_measurement: 'lx',
+      value_template: '{{ value_json.illuminance_4 }}',
     },
 };
 const illuminanceLRDDiscovery = {
     type: 'sensor',
     object_id: 'illuminance_1',
     discovery_payload: {
-        device_class: 'illuminance',
-        value_template: '{{ value_json.illuminance_1 }}',
+      device_class: 'illuminance',
+      value_template: '{{ value_json.illuminance_1 }}',
     },
 };
 const temperatureDiscovery  = {
     type: 'sensor',
     object_id: 'temperature',
     discovery_payload: {
-        unit_of_measurement: '캜',
-        device_class: 'temperature',
-        value_template: '{{ value_json.temperature }}',
+      unit_of_measurement: '째C',
+      device_class: 'temperature',
+      value_template: '{{ value_json.temperature }}',
     },
 };
 const humidityDiscovery = {
     type: 'sensor',
     object_id: 'humidity',
     discovery_payload: {
-        unit_of_measurement: '%',
-        device_class: 'humidity',
-        value_template: '{{ value_json.humidity }}',
+      unit_of_measurement: '%',
+      device_class: 'humidity',
+      value_template: '{{ value_json.humidity }}',
     },
 };
 const pressureDiscovery = {
     type: 'sensor',
     object_id: 'pressure',
     discovery_payload: {
-        unit_of_measurement: 'hPa',
-        device_class: 'pressure',
-        value_template: '{{ value_json.pressure }}',
+      unit_of_measurement: 'hPa',
+      device_class: 'pressure',
+      value_template: '{{ value_json.pressure }}',
     },
 };
 const batteryDiscovery = {
     type: 'sensor',
     object_id: 'battery',
     discovery_payload: {
-        unit_of_measurement: '%',
-        device_class: 'battery',
-        value_template: '{{ value_json.battery }}',
+      unit_of_measurement: '%',
+      device_class: 'battery',
+      value_template: '{{ value_json.battery }}',
     },
 };
 
@@ -372,11 +401,9 @@ const device = {
                 'msIlluminanceMeasurement',
             ]);
             await bind(secondEndpoint, coordinatorEndpoint, [
-//                'genOnOff',
                 'genBinaryInput',
             ]);
             await bind(thirdEndpoint, coordinatorEndpoint, [
-//                'genOnOff',
                 'msOccupancySensing',
             ]);
             await bind(fourthEndpoint, coordinatorEndpoint, [
@@ -430,20 +457,31 @@ const device = {
             await thirdEndpoint.configureReporting('msOccupancySensing', msOccupancySensingBindPayload);
             await fourthEndpoint.configureReporting('msIlluminanceMeasurement', msBindPayload);
         },
-        homeassistant: [occupancyDiscovery,contactDiscovery,illuminanceDiscovery,illuminanceLRDDiscovery,temperatureDiscovery,humidityDiscovery,pressureDiscovery,batteryDiscovery],
+
+        homeassistant: [occupancyDiscovery,contactDiscovery,
+            illuminanceDiscovery,
+            illuminanceLRDDiscovery,
+            temperatureDiscovery,
+            humidityDiscovery,
+            pressureDiscovery,
+            batteryDiscovery,
+            OccupancyExtendedDiscovery
+        ],
+
         exposes: [
             exposes.numeric('battery', ACCESS_STATE).withUnit('%').withDescription('Remaining battery in %').withValueMin(0).withValueMax(100),
-            exposes.numeric('temperature', ACCESS_STATE).withUnit('캜').withDescription('Measured temperature value'), 
+            exposes.numeric('temperature', ACCESS_STATE).withUnit('째C').withDescription('Measured temperature value'), 
             exposes.numeric('humidity', ACCESS_STATE).withUnit('%').withDescription('Measured relative humidity'),
             exposes.numeric('pressure', ACCESS_STATE).withUnit('hPa').withDescription('The measured atmospheric pressure'),
             exposes.numeric('illuminance_1', ACCESS_STATE).withDescription('Raw measured illuminance LDR'), 
             exposes.numeric('illuminance_4', ACCESS_STATE).withUnit('lx').withDescription('Measured illuminance in lux BH1750'),
             exposes.binary('contact', ACCESS_STATE).withDescription('Indicates if the contact is closed (= true) or open (= false)'), 
             exposes.binary('occupancy', ACCESS_STATE).withDescription('Indicates whether the device detected occupancy'), 
+            exposes.numeric('occupancy_extended', ACCESS_STATE).withDescription('Indicates whether the device detected occupancy'),
             exposes.numeric('occupancy_timeout', ACCESS_STATE | ACCESS_WRITE | ACCESS_READ).withUnit('sec').withDescription('Delay occupied to unoccupied + 10 sec adaptation'),
             exposes.numeric('unoccupancy_timeout', ACCESS_STATE | ACCESS_WRITE | ACCESS_READ).withUnit('sec').withDescription('Delay unoccupied to occupied'),
             exposes.numeric('illuminance_sensitivity', ACCESS_STATE | ACCESS_WRITE | ACCESS_READ).withDescription('Illuminance level sensitivity 31 - 254 (default = 69)'),
-            exposes.numeric('temperature_change', ACCESS_STATE | ACCESS_WRITE | ACCESS_READ).withUnit('캜').withDescription('Temperature min absolute change (default = 0,5 캜)'),
+            exposes.numeric('temperature_change', ACCESS_STATE | ACCESS_WRITE | ACCESS_READ).withUnit('째C').withDescription('Temperature min absolute change (default = 0,5 째C)'),
             exposes.numeric('temperature_period', ACCESS_STATE | ACCESS_WRITE | ACCESS_READ).withUnit('sec').withDescription('Temperature measurement period (default = 10 sec)'),
             exposes.numeric('pressure_change', ACCESS_STATE | ACCESS_WRITE | ACCESS_READ).withUnit('hPa').withDescription('Pressure min absolute change (default = 0,1 hPa)'),
             exposes.numeric('pressure_period', ACCESS_STATE | ACCESS_WRITE | ACCESS_READ).withUnit('sec').withDescription('Pressure measurement period (default = 10 sec)'),
