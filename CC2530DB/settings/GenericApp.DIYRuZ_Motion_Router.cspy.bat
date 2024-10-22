@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\Texas Instruments\Z-Stack 3.0.2\Projects\zstack\HomeAutomation\motion\CC2530DB\settings\GenericApp.DIYRuZ_Motion.general.xcl" --backend -f "C:\Texas Instruments\Z-Stack 3.0.2\Projects\zstack\HomeAutomation\motion\CC2530DB\settings\GenericApp.DIYRuZ_Motion.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\Texas Instruments\Z-Stack 3.0.2\Projects\zstack\HomeAutomation\motion\CC2530DB\settings\GenericApp.DIYRuZ_Motion_Router.general.xcl" --backend -f "C:\Texas Instruments\Z-Stack 3.0.2\Projects\zstack\HomeAutomation\motion\CC2530DB\settings\GenericApp.DIYRuZ_Motion_Router.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\Texas Instruments\Z-Stack 3.0.2\Projects\zstack\HomeAutomation\motion\CC2530DB\settings\GenericApp.DIYRuZ_Motion.general.xcl" "--debug_file=%~1" --backend -f "C:\Texas Instruments\Z-Stack 3.0.2\Projects\zstack\HomeAutomation\motion\CC2530DB\settings\GenericApp.DIYRuZ_Motion.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\Texas Instruments\Z-Stack 3.0.2\Projects\zstack\HomeAutomation\motion\CC2530DB\settings\GenericApp.DIYRuZ_Motion_Router.general.xcl" "--debug_file=%~1" --backend -f "C:\Texas Instruments\Z-Stack 3.0.2\Projects\zstack\HomeAutomation\motion\CC2530DB\settings\GenericApp.DIYRuZ_Motion_Router.driver.xcl" 
 
 @echo off 
 :end
